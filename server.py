@@ -2,11 +2,18 @@ from fastapi import FastAPI
 from pydantic import BaseModel,Field
 from datetime import datetime
 from db import CRUD
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(
     title= "URL shortener",
     description= "A simple API built using AppWrite's db",
     docs_url="/"
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
 )
 
 crud = CRUD()
